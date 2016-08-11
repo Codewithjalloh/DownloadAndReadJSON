@@ -12,7 +12,31 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        
+        // downloading the file
+        let requestURL = NSURL(string: "http://www.learnswiftonline.com/Samples/subway.json")!
+        
+        let urlRequest: NSMutableURLRequest =  NSMutableURLRequest(URL: requestURL)
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(urlRequest) {
+            (data, response, error ) -> Void in
+            
+            let httpResponse = response as! NSHTTPURLResponse
+            let statusCode = httpResponse.statusCode
+            
+            if (statusCode == 200) {
+                print("file downloaded successfully")
+                
+                // reading json
+            }
+            
+        }
+        task.resume()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,4 +46,8 @@ class ViewController: UIViewController {
 
 
 }
+
+
+// thank you http://www.learnswiftonline.com/
+
 
