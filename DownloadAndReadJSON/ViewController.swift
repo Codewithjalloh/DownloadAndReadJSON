@@ -31,7 +31,26 @@ class ViewController: UIViewController {
                 print("file downloaded successfully")
                 
                 // reading json
-            }
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                    
+                    if let stations = json["stations"] as? [[String: AnyObject]] {
+                        
+                    for station in stations {
+                    
+                        if let name = station["stationName"] as? String {
+                            if let year = station["buildYear"] as? String {
+                                print(name, year)
+                            }
+                        }
+                    }
+                }
+                
+                } catch {
+                    print("error with json \(error)")
+                }
+            
+        }
             
         }
         task.resume()
